@@ -1,7 +1,8 @@
 {
-    "name": "ionic-hello-world",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "name": "k-complex",
+    "version": "0.0.1",
+    "author": "Steven Harland",
+    "homepage": "http://k-complex.com/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -41,5 +42,5 @@
         "cordova-plugin-splashscreen"
     ],
     "cordovaPlatforms": [],
-    "description": "K-complex: An Ionic project"
+    "description": ""
 }
