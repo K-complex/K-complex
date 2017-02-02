@@ -22,12 +22,12 @@ export class DreamService {
     create(dream: Dream): Promise<Dream> {
         return this.db.post(dream)
             .then(response => this.db.get(response.id))
-            .catch(console.log);
+            .catch(this.handleError);
     }
 
     get(id: string): Promise<Dream> {
         return this.db.get(id)
-            .catch(console.log);
+            .catch(this.handleError);
     }
 
     getAll(): Promise<Dream[]> {
@@ -44,21 +44,20 @@ export class DreamService {
                             let dreams = response.docs.map(d => d as Dream);
                             resolve(dreams);
                         })
-                        .catch(error => {
-                            console.log(error);
-                            reject(error);
-                        });
+                        .catch(this.handleError);
                 })
-                .catch(error => {
-                    console.log(error);
-                    reject(error);
-                });
+                .catch(this.handleError);
         });
     }
 
     update(dream: Dream): Promise<Dream> {
         return this.db.put(dream)
             .then(response => this.db.get(response.id))
-            .catch(console.log);
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
 }
