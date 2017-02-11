@@ -13,7 +13,9 @@ import { DreamService } from './dream.service';
         DreamFormPage
     ],
     imports: [
-        IonicModule.forRoot(AppComponent)
+        IonicModule.forRoot(AppComponent, {
+            mode: 'ios'
+        })
     ],
     bootstrap: [IonicApp],
     entryComponents: [
