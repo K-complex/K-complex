@@ -11,6 +11,9 @@ $font-path: "../assets/fonts";
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+$font-family-base: "Ubuntu", sans-serif;
+$font-size-root: 65%;
+$toolbar-background: rgb(40, 55, 60);
 
 
 
@@ -35,6 +38,8 @@ $colors: (
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
+$toolbar-ios-button-color: rgb(170, 225, 165);
+$toolbar-ios-title-text-color: rgb(170, 225, 165);
 
 
 
