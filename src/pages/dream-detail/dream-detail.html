@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="edit()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <header text-center>
+        <h5>{{dream.title}}</h5>
+        <h6>{{dream.date | date:'d MMM y, HH:mm'}}</h6>
+    </header>
+    <p class="dream-description">{{dream.description}}</p>
+</ion-content>

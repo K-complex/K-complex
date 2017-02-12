@@ -21,7 +21,7 @@
     </ion-grid>
     <div *ngIf="dreams.length > 0">
         <ion-list>
-            <button ion-item *ngFor="let dream of dreams" (click)="goToDreamForm(dream._id)">
+            <button ion-item *ngFor="let dream of dreams" (click)="goToDreamDetail(dream._id)">
                 <h2>{{dream.title}}</h2>
                 <p>{{dream.date | date:'d MMM y, HH:mm'}}</p>
             </button>

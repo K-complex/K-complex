@@ -5,6 +5,7 @@ import { ElasticModule } from 'angular2-elastic';
 
 import { AppComponent } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DreamDetailPage } from '../pages/dream-detail/dream-detail';
 import { DreamFormPage } from '../pages/dream-form/dream-form';
 import { DreamService } from './dream.service';
 
@@ -12,6 +13,7 @@ import { DreamService } from './dream.service';
     declarations: [
         AppComponent,
         HomePage,
+        DreamDetailPage,
         DreamFormPage
     ],
     imports: [
@@ -22,6 +24,7 @@ import { DreamService } from './dream.service';
     entryComponents: [
         AppComponent,
         HomePage,
+        DreamDetailPage,
         DreamFormPage
     ],
     providers: [

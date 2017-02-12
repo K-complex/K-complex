@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { Dream } from '../../app/dream';
 import { DreamService } from '../../app/dream.service';
+import { DreamDetailPage } from '../dream-detail/dream-detail';
 import { DreamFormPage } from '../dream-form/dream-form';
 
 @Component({
@@ -24,5 +25,9 @@ export class HomePage {
 
     goToDreamForm(id?: string) {
         this.navCtrl.push(DreamFormPage, { id: id });
+    }
+
+    goToDreamDetail(id: string) {
+        this.navCtrl.push(DreamDetailPage, { id: id });
     }
 }
