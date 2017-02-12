@@ -11,14 +11,14 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-card *ngIf="dreams.length === 0">
-        <ion-card-header>
-            Welcome to your dream journal.
-        </ion-card-header>
-        <ion-card-content>
-            Click the + button above to create your first entry.
-        </ion-card-content>
-    </ion-card>
+    <ion-grid *ngIf="dreams.length === 0">
+        <ion-row>
+            <ion-col text-center>
+                <h5>Welcome to your dream journal.</h5>
+                <p>Click the + button above to create your first entry.</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     <div *ngIf="dreams.length > 0">
         <ion-list>
             <button ion-item *ngFor="let dream of dreams" (click)="goToDreamForm(dream._id)">
