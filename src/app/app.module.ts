@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DreamDetailPage } from '../pages/dream-detail/dream-detail';
 import { DreamFormPage } from '../pages/dream-form/dream-form';
+import { DreamPopoverPage } from '../pages/dream-popover/dream-popover';
 import { DreamService } from './dream.service';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DreamService } from './dream.service';
         AppComponent,
         HomePage,
         DreamDetailPage,
-        DreamFormPage
+        DreamFormPage,
+        DreamPopoverPage
     ],
     imports: [
         IonicModule.forRoot(AppComponent),
@@ -25,7 +27,8 @@ import { DreamService } from './dream.service';
         AppComponent,
         HomePage,
         DreamDetailPage,
-        DreamFormPage
+        DreamFormPage,
+        DreamPopoverPage
     ],
     providers: [
         { provide: ErrorHandler, useClass: IonicErrorHandler },

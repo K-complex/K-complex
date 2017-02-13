@@ -25,6 +25,11 @@ export class DreamService {
             .catch(this.handleError);
     }
 
+    delete(id: string, rev: string): Promise<any> {
+        return this.db.remove(id, rev)
+            .catch(this.handleError);
+    }
+
     get(id: string): Promise<Dream> {
         return this.db.get(id)
             .catch(this.handleError);
