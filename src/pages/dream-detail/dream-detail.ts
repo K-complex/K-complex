@@ -28,7 +28,7 @@ export class DreamDetailPage {
             .then(dream => this.dream = dream);
     }
 
-    edit() {
+    goToDreamForm() {
         this.navCtrl.push(DreamFormPage, { id: this.id });
     }
 
