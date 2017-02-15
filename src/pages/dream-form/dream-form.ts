@@ -3,8 +3,8 @@ import { AlertController, NavController, NavParams } from 'ionic-angular';
 
 import * as moment from 'moment';
 
-import { Dream } from '../../app/dream';
-import { DreamService } from '../../app/dream.service';
+import { Dream } from '../../providers/dream';
+import { DreamService } from '../../providers/dream.service';
 
 @Component({
     selector: 'page-dream-form',

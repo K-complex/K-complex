@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Dream } from '../../app/dream';
-import { DreamService } from '../../app/dream.service';
+import { Dream } from '../../providers/dream';
+import { DreamService } from '../../providers/dream.service';
 import { DreamDetailPage } from '../dream-detail/dream-detail';
 import { DreamFormPage } from '../dream-form/dream-form';
 

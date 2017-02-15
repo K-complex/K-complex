@@ -8,7 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { DreamDetailPage } from '../pages/dream-detail/dream-detail';
 import { DreamFormPage } from '../pages/dream-form/dream-form';
 import { DreamPopoverPage } from '../pages/dream-popover/dream-popover';
-import { DreamService } from './dream.service';
+import { DreamService } from '../providers/dream.service';
 
 @NgModule({
     declarations: [

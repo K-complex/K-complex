@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, PopoverController } from 'ionic-angular';
 
-import { Dream } from '../../app/dream';
+import { Dream } from '../../providers/dream';
 import { DreamFormPage } from '../dream-form/dream-form';
 import { DreamPopoverPage } from '../dream-popover/dream-popover';
-import { DreamService } from '../../app/dream.service';
+import { DreamService } from '../../providers/dream.service';
 
 @Component({
     selector: 'page-dream-detail',
