@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, PopoverController, ToastController } from 'ionic-angular';
 
 import { Dream } from '../../providers/dream';
 import { DreamFormPage } from '../dream-form/dream-form';
@@ -19,6 +19,7 @@ export class DreamDetailPage {
         private navCtrl: NavController,
         private navParams: NavParams,
         private popoverCtrl: PopoverController,
+        private toastCtrl: ToastController,
         private dreamService: DreamService) {
     }
 
@@ -38,7 +39,16 @@ export class DreamDetailPage {
         popover.onDidDismiss(action => {
             if (action === 'delete') {
                 this.dreamService.delete(this.dream._id, this.dream._rev)
-                    .then(() => this.navCtrl.pop());
+                    .then(() => {
+                        this.navCtrl.pop();
+
+                        let toast = this.toastCtrl.create({
+                            message: 'Dream deleted.',
+                            duration: 3000,
+                            showCloseButton: true
+                        });
+                        toast.present();
+                    });
             }
         });
 
