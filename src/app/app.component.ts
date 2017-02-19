@@ -1,21 +1,38 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Splashscreen, StatusBar } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
 
+/**
+ * Root component.
+ * 
+ * @export
+ * @class AppComponent
+ */
 @Component({
     templateUrl: 'app.html'
 })
 export class AppComponent {
+    /**
+     * Root page.
+     * 
+     * 
+     * @memberof AppComponent
+     */
     rootPage = HomePage;
 
+    /**
+     * Creates an instance of AppComponent.
+     * 
+     * @param {Platform} platform
+     * 
+     * @memberof AppComponent
+     */
     constructor(platform: Platform) {
         platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            StatusBar.styleDefault();
             Splashscreen.hide();
+            StatusBar.styleDefault();
         });
     }
 }

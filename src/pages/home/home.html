@@ -24,7 +24,7 @@
         <ion-list>
             <button ion-item *ngFor="let dream of dreams" (click)="goToDreamDetail(dream._id)">
                 <h2>{{dream.title}}</h2>
-                <p>{{dream.date | date:'d MMM y, HH:mm'}}</p>
+                <p>{{dream.date | date:'d MMM y'}}</p>
             </button>
         </ion-list>
     </div>

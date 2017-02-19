@@ -1,5 +1,5 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ElasticModule } from 'angular2-elastic';
 
@@ -10,6 +10,12 @@ import { DreamFormPage } from '../pages/dream-form/dream-form';
 import { DreamPopoverPage } from '../pages/dream-popover/dream-popover';
 import { DreamService } from '../providers/dream.service';
 
+/**
+ * Root module.
+ * 
+ * @export
+ * @class AppModule
+ */
 @NgModule({
     declarations: [
         AppComponent,
@@ -35,4 +41,5 @@ import { DreamService } from '../providers/dream.service';
         DreamService
     ]
 })
-export class AppModule { }
+export class AppModule {
+}
