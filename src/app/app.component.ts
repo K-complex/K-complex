@@ -32,7 +32,7 @@ export class AppComponent {
     constructor(platform: Platform) {
         platform.ready().then(() => {
             Splashscreen.hide();
-            StatusBar.styleDefault();
+            StatusBar.hide();
         });
     }
 }

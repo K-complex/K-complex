@@ -25,7 +25,9 @@ import { DreamService } from '../providers/dream.service';
         DreamPopoverPage
     ],
     imports: [
-        IonicModule.forRoot(AppComponent),
+        IonicModule.forRoot(AppComponent, {
+            statusbarPadding: false
+        }),
         ElasticModule
     ],
     bootstrap: [IonicApp],
