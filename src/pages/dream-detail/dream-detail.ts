@@ -89,11 +89,34 @@ export class DreamDetailPage {
 
         popover.onDidDismiss(action => {
             if (action === 'delete') {
-                this.deleteDream();
+                this.confirmDelete();
             }
         });
 
         popover.present({ ev: event });
+    }
+
+    /**
+     * Asks the user if they want to delete the current dream.
+     * 
+     * @private
+     * 
+     * @memberof DreamDetailPage
+     */
+    private confirmDelete() {
+        let confirm = this.alertCtrl.create({
+            message: 'Delete this dream?',
+            buttons: [
+                {
+                    text: 'No'
+                },
+                {
+                    text: 'Yes',
+                    handler: () => this.deleteDream()
+                }
+            ]
+        });
+        confirm.present();
     }
 
     /**
