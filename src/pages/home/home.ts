@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { LoadingController, NavController } from 'ionic-angular';
 
 import { Dream } from '../../providers/dream';
 import { DreamDetailPage } from '../dream-detail/dream-detail';
@@ -26,6 +26,14 @@ export class HomePage {
     dreams: Dream[] = [];
 
     /**
+     * Flag to indicate when dreams have been loaded.
+     * 
+     * 
+     * @memberof HomePage
+     */
+    dreamsLoaded = false;
+
+    /**
      * Creates an instance of HomePage.
      * 
      * @param {NavController} navCtrl
@@ -34,6 +42,7 @@ export class HomePage {
      * @memberof HomePage
      */
     constructor(
+        private loadingCtrl: LoadingController,
         private navCtrl: NavController,
         private dreamService: DreamService) {
     }
@@ -45,8 +54,17 @@ export class HomePage {
      * @memberof HomePage
      */
     ionViewWillEnter() {
+        let loader = this.loadingCtrl.create({
+            content: "Loading dreams..."
+        });
+        loader.present();
+
         this.dreamService.getAll()
-            .then(dreams => this.dreams = dreams);
+            .then(dreams => {
+                this.dreams = dreams;
+                this.dreamsLoaded = true;
+                loader.dismiss();
+            });
     }
 
     /**

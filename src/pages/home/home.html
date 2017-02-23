@@ -11,7 +11,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-grid *ngIf="dreams.length === 0">
+    <ion-grid *ngIf="dreamsLoaded && dreams.length === 0">
         <ion-row>
             <ion-col text-center>
                 <ion-icon name="calendar"></ion-icon>
@@ -20,7 +20,7 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-    <div *ngIf="dreams.length > 0">
+    <div *ngIf="dreamsLoaded && dreams.length > 0">
         <ion-list>
             <button ion-item *ngFor="let dream of dreams" (click)="goToDreamDetail(dream._id)">
                 <h2>{{dream.title}}</h2>
