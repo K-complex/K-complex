@@ -7,7 +7,7 @@ import { Dream } from '../../providers/dream';
 import { DreamService } from '../../providers/dream.service';
 
 /**
- * Page to create or edit a dream.
+ * Displays a form for creating or editing a dream.
  * 
  * @export
  * @class DreamFormPage
