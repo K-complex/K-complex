@@ -26,6 +26,32 @@ export class DreamFormPage {
     dream: Dream;
 
     /**
+     * The text currently entered into the dreamsign search form.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    dreamsignQuery = '';
+
+    /**
+     * The dreamsign suggestions currently being displayed by the dreamsign
+     * search.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    dreamsignSuggestions = [];
+
+    /**
+     * The segment of the form currently being displayed ('details' or
+     * 'dreamsigns').
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    segment = 'details';
+
+    /**
      * The ID of the dream being edited.
      * 
      * @private
@@ -93,5 +119,47 @@ export class DreamFormPage {
             });
             alert.present();
         }
+    }
+
+    /**
+     * Gets dreamsign suggestions based on the search query text entered.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    getDreamsignSuggestions() {
+        if (this.dreamsignQuery && this.dreamsignQuery.trim() != '') {
+            this.dreamsignSuggestions = [this.dreamsignQuery];
+        } else {
+            this.dreamsignSuggestions = [];
+        }
+    }
+
+    /**
+     * Adds a dreamsign to the current dream.
+     * 
+     * @param {string} dreamsign
+     * 
+     * @memberof DreamFormPage
+     */
+    addDreamsign(dreamsign: string) {
+        if (!this.dream.dreamsigns) {
+            this.dream.dreamsigns = [];
+        }
+
+        this.dream.dreamsigns.push(dreamsign);
+        this.dreamsignQuery = '';
+        this.dreamsignSuggestions = [];
+    }
+
+    /**
+     * Removes a dreamsign from the current dream.
+     * 
+     * @param {number} index 
+     * 
+     * @memberof DreamFormPage
+     */
+    removeDreamsign(index: number) {
+        this.dream.dreamsigns.splice(index, 1);
     }
 }

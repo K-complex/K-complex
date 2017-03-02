@@ -29,13 +29,14 @@ $colors: (
     secondary: rgb(170, 225, 165),
     danger: #f53d3d,
     light: #f4f4f4,
-    dark: #222
+    dark: rgb(40, 55, 60)
 );
 
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
+$searchbar-ios-background-color: #fff;
 $toolbar-ios-button-color: color($colors, secondary);
 $toolbar-ios-title-text-color: color($colors, secondary);
 
