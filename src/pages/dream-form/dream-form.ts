@@ -122,14 +122,22 @@ export class DreamFormPage {
     }
 
     /**
-     * Gets dreamsign suggestions based on the search query text entered.
+     * Gets dreamsign suggestions based on the search query entered.
      * 
      * 
      * @memberof DreamFormPage
      */
     getDreamsignSuggestions() {
-        if (this.dreamsignQuery && this.dreamsignQuery.trim() != '') {
-            this.dreamsignSuggestions = [this.dreamsignQuery];
+        if (this.dreamsignQuery && this.dreamsignQuery.trim() !== '') {
+            this.dreamService.getDreamsigns(this.dreamsignQuery, 4)
+                .then(dreamsigns => {
+                    this.dreamsignSuggestions = dreamsigns;
+
+                    // Ensure the search query appears at the top of the list
+                    if (this.dreamsignSuggestions[0] !== this.dreamsignQuery) {
+                        this.dreamsignSuggestions.unshift(this.dreamsignQuery);
+                    }
+                });
         } else {
             this.dreamsignSuggestions = [];
         }
