@@ -7,7 +7,7 @@ import { DreamPopoverPage } from '../dream-popover/dream-popover';
 import { DreamService } from '../../providers/dream.service';
 
 /**
- * Page to display dream details.
+ * Displays dream details.
  * 
  * @export
  * @class DreamDetailPage

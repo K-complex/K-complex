@@ -8,18 +8,52 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-list *ngIf="dream">
-        <ion-item>
-            <ion-label floating>Date/Time</ion-label>
-            <ion-datetime displayFormat="D MMM YYYY" [(ngModel)]="dream.date" required></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Title</ion-label>
-            <ion-input type="text" [(ngModel)]="dream.title" required></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Description</ion-label>
-            <ion-textarea [(ngModel)]="dream.description" required fz-elastic></ion-textarea>
-        </ion-item>
-    </ion-list>
+    <div *ngIf="dream" [ngSwitch]="segment">
+        <ion-list *ngSwitchCase="'details'">
+            <ion-item>
+                <ion-label floating>Date</ion-label>
+                <ion-datetime displayFormat="D MMM YYYY" [(ngModel)]="dream.date" required></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Title</ion-label>
+                <ion-input type="text" [(ngModel)]="dream.title" autocomplete="on" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Description</ion-label>
+                <ion-textarea [(ngModel)]="dream.description" autocomplete="on" required fz-elastic></ion-textarea>
+            </ion-item>
+        </ion-list>
+        <div *ngSwitchCase="'dreamsigns'">
+            <ion-searchbar (ionInput)="getDreamsignSuggestions()" [(ngModel)]="dreamsignQuery" placeholder="Enter a dreamsign">
+            </ion-searchbar>
+            <ion-list *ngIf="dreamsignQuery">
+                <ion-item *ngFor="let suggestion of dreamsignSuggestions" (click)="addDreamsign(suggestion)">
+                    {{ suggestion }}
+                    <ion-icon name="add-circle" color="dark" item-right></ion-icon>
+                </ion-item>
+            </ion-list>
+            <div padding>
+                <span *ngFor="let sign of dream.dreamsigns; let i = index">
+                    <ion-chip>
+                        <ion-label>{{sign}}</ion-label>
+                        <button ion-button clear color="dark" (click)="removeDreamsign(i)">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </button>
+                    </ion-chip>
+                </span>
+            </div>
+        </div>
+    </div>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="segment" color="secondary">
+            <ion-segment-button value="details">
+                Details
+            </ion-segment-button>
+            <ion-segment-button value="dreamsigns">
+                Dreamsigns
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-footer>

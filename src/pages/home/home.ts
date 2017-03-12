@@ -7,7 +7,7 @@ import { DreamFormPage } from '../dream-form/dream-form';
 import { DreamService } from '../../providers/dream.service';
 
 /**
- * Page to display a list of dreams.
+ * Displays a list of dreams.
  * 
  * @export
  * @class HomePage

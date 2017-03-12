@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
 /**
- * Page to display additional dream actions.
+ * Displays additional dream actions.
  * 
  * @export
  * @class DreamPopoverPage

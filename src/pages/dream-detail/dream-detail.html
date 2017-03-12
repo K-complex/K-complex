@@ -16,6 +16,9 @@
             <h5>{{dream.title}}</h5>
             <h6>{{dream.date | date:'d MMM y'}}</h6>
         </header>
+        <span *ngFor="let sign of dream.dreamsigns">
+            <ion-chip><ion-label>{{sign}}</ion-label></ion-chip>
+        </span>
         <p class="dream-description">{{dream.description}}</p>
     </div>
 </ion-content>

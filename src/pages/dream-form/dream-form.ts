@@ -7,7 +7,7 @@ import { Dream } from '../../providers/dream';
 import { DreamService } from '../../providers/dream.service';
 
 /**
- * Page to create or edit a dream.
+ * Displays a form for creating or editing a dream.
  * 
  * @export
  * @class DreamFormPage
@@ -24,6 +24,32 @@ export class DreamFormPage {
      * @memberof DreamFormPage
      */
     dream: Dream;
+
+    /**
+     * The text currently entered into the dreamsign search form.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    dreamsignQuery = '';
+
+    /**
+     * The dreamsign suggestions currently being displayed by the dreamsign
+     * search.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    dreamsignSuggestions = [];
+
+    /**
+     * The segment of the form currently being displayed ('details' or
+     * 'dreamsigns').
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    segment = 'details';
 
     /**
      * The ID of the dream being edited.
@@ -93,5 +119,55 @@ export class DreamFormPage {
             });
             alert.present();
         }
+    }
+
+    /**
+     * Gets dreamsign suggestions based on the search query entered.
+     * 
+     * 
+     * @memberof DreamFormPage
+     */
+    getDreamsignSuggestions() {
+        if (this.dreamsignQuery && this.dreamsignQuery.trim() !== '') {
+            this.dreamService.getDreamsigns(this.dreamsignQuery, 4)
+                .then(dreamsigns => {
+                    this.dreamsignSuggestions = dreamsigns;
+
+                    // Ensure the search query appears at the top of the list
+                    if (this.dreamsignSuggestions[0] !== this.dreamsignQuery) {
+                        this.dreamsignSuggestions.unshift(this.dreamsignQuery);
+                    }
+                });
+        } else {
+            this.dreamsignSuggestions = [];
+        }
+    }
+
+    /**
+     * Adds a dreamsign to the current dream.
+     * 
+     * @param {string} dreamsign
+     * 
+     * @memberof DreamFormPage
+     */
+    addDreamsign(dreamsign: string) {
+        if (!this.dream.dreamsigns) {
+            this.dream.dreamsigns = [];
+        }
+
+        this.dream.dreamsigns.push(dreamsign);
+        this.dreamsignQuery = '';
+        this.dreamsignSuggestions = [];
+    }
+
+    /**
+     * Removes a dreamsign from the current dream.
+     * 
+     * @param {number} index 
+     * 
+     * @memberof DreamFormPage
+     */
+    removeDreamsign(index: number) {
+        this.dream.dreamsigns.splice(index, 1);
     }
 }

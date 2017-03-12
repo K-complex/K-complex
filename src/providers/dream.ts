@@ -11,4 +11,5 @@ export class Dream {
     date: string;
     title: string;
     description: string;
+    dreamsigns: Array<string>;
 }

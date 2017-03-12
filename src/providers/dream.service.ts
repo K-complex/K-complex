@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 
 import * as PouchDB from 'pouchdb';
 import * as PouchDBFind from 'pouchdb-find';
+import * as PouchDBUpsert from 'pouchdb-upsert';
 import * as moment from 'moment';
 
 import { Dream } from './dream';
+
+// Map/reduce emit() function
+declare var emit: any;
 
 /**
  * Implements CRUD operations on dreams.
@@ -46,6 +50,27 @@ export class DreamService {
     private dateFormat = 'YYYY-MM-DD';
 
     /**
+     * Index of dreamsigns across all dreams.
+     * 
+     * @private
+     * @type {*}
+     * @memberof DreamService
+     */
+    private dreamsignIndex: any = {
+        _id: '_design/dreamsigns',
+        views: {
+            dreamsigns: {
+                map: ((dream: Dream) => {
+                    for (let sign of dream.dreamsigns) {
+                        emit(sign);
+                    }
+                }).toString(),
+                reduce: (() => true).toString()
+            }
+        }
+    };
+
+    /**
      * Creates an instance of DreamService.
      * 
      * 
@@ -53,7 +78,9 @@ export class DreamService {
      */
     constructor() {
         PouchDB.plugin(PouchDBFind);
+        PouchDB.plugin(PouchDBUpsert);
         this.db = new PouchDB('dreams');
+        this.db.putIfNotExists(this.dreamsignIndex);
     }
 
     /**
@@ -124,6 +151,28 @@ export class DreamService {
                 })
                 .catch(this.handleError);
         });
+    }
+
+    /**
+     * Gets unique dreamsigns with a given prefix.
+     * 
+     * @param {string} prefix - The prefix string.
+     * @param {number} limit - The number of signs to return.
+     * @returns {Promise<string[]>} 
+     * 
+     * @memberof DreamService
+     */
+    getDreamsigns(prefix: string, limit: number): Promise<string[]> {
+        let options = {
+            startkey: prefix,
+            endkey: prefix + '\uffff',
+            limit: limit,
+            group: true
+        };
+
+        return this.db.query('dreamsigns', options)
+            .then(response => response.rows.map(r => r.key))
+            .catch(this.handleError);
     }
 
     /**
