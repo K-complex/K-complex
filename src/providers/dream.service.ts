@@ -50,7 +50,7 @@ export class DreamService {
     private dateFormat = 'YYYY-MM-DD';
 
     /**
-     * Index of dreamsigns across all dreams.
+     * Index of dreamsigns and counts across all dreams.
      * 
      * @private
      * @type {*}
@@ -58,6 +58,7 @@ export class DreamService {
      */
     private dreamsignIndex: any = {
         _id: '_design/dreamsigns',
+        version: 2,
         views: {
             dreamsigns: {
                 map: ((dream: Dream) => {
@@ -65,7 +66,7 @@ export class DreamService {
                         emit(sign);
                     }
                 }).toString(),
-                reduce: (() => true).toString()
+                reduce: '_count'
             }
         }
     };
@@ -80,7 +81,16 @@ export class DreamService {
         PouchDB.plugin(PouchDBFind);
         PouchDB.plugin(PouchDBUpsert);
         this.db = new PouchDB('dreams');
-        this.db.putIfNotExists(this.dreamsignIndex);
+
+        // Update or insert dreamsign index
+        this.db.upsert(this.dreamsignIndex._id, (doc: any) => {
+            if (doc.version === this.dreamsignIndex.version) {
+                // No update required
+                return false;
+            }
+
+            return Object.assign(doc, this.dreamsignIndex);
+        });
     }
 
     /**
