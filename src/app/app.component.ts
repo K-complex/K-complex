@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { Splashscreen, StatusBar } from 'ionic-native';
 
+import { AnalysisPage } from '../pages/analysis/analysis';
 import { HomePage } from '../pages/home/home';
 
 /**
@@ -14,6 +15,23 @@ import { HomePage } from '../pages/home/home';
     templateUrl: 'app.html'
 })
 export class AppComponent {
+    /**
+     * Reference to the nav element.
+     * 
+     * @type {Nav}
+     * @memberof AppComponent
+     */
+    @ViewChild(Nav)
+    nav: Nav;
+
+    /**
+     * App menu items.
+     * 
+     * @type {Array<{ title: string, component: any, icon: string }>}
+     * @memberof AppComponent
+     */
+    pages: Array<{ title: string, component: any, icon: string }>;
+
     /**
      * Root page.
      * 
@@ -34,5 +52,21 @@ export class AppComponent {
             Splashscreen.hide();
             StatusBar.hide();
         });
+
+        this.pages = [
+            { title: 'Journal', component: HomePage, icon: 'calendar' },
+            { title: 'Analysis', component: AnalysisPage, icon: 'pulse' }
+        ];
+    }
+
+    /**
+     * Navigates to a page.
+     * 
+     * @param {any} page 
+     * 
+     * @memberof AppComponent
+     */
+    openPage(page) {
+        this.nav.setRoot(page.component);
     }
 }

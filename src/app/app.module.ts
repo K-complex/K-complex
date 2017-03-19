@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ElasticModule } from 'angular2-elastic';
 
 import { AppComponent } from './app.component';
+import { AnalysisPage } from '../pages/analysis/analysis';
 import { HomePage } from '../pages/home/home';
 import { DreamDetailPage } from '../pages/dream-detail/dream-detail';
 import { DreamFormPage } from '../pages/dream-form/dream-form';
@@ -19,6 +20,7 @@ import { DreamService } from '../providers/dream.service';
 @NgModule({
     declarations: [
         AppComponent,
+        AnalysisPage,
         HomePage,
         DreamDetailPage,
         DreamFormPage,
@@ -33,6 +35,7 @@ import { DreamService } from '../providers/dream.service';
     bootstrap: [IonicApp],
     entryComponents: [
         AppComponent,
+        AnalysisPage,
         HomePage,
         DreamDetailPage,
         DreamFormPage,
