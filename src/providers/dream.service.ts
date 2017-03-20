@@ -164,6 +164,28 @@ export class DreamService {
     }
 
     /**
+     * Gets all dreamsigns along with their counts.
+     * 
+     * @returns {Promise<{ dreamsign: string, count: number }[]>} 
+     * 
+     * @memberof DreamService
+     */
+    getDreamsignCounts(): Promise<{ dreamsign: string, count: number }[]> {
+        let options = {
+            group: true
+        };
+
+        return this.db.query('dreamsigns', options)
+            .then(response => response.rows.sort((a, b) => b.value - a.value).map(r => {
+                return {
+                    dreamsign: r.key,
+                    count: r.value
+                };
+            }))
+            .catch(this.handleError);
+    }
+
+    /**
      * Gets unique dreamsigns with a given prefix.
      * 
      * @param {string} prefix - The prefix string.
