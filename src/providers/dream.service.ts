@@ -164,15 +164,17 @@ export class DreamService {
     }
 
     /**
-     * Gets all dreamsigns along with their counts.
+     * Gets dreamsigns along with their counts, highest to lowest.
      * 
+     * @param {number} [limit] - Optional number of signs to return.
      * @returns {Promise<{ dreamsign: string, count: number }[]>} 
      * 
      * @memberof DreamService
      */
-    getDreamsignCounts(): Promise<{ dreamsign: string, count: number }[]> {
+    getDreamsignCounts(limit?: number): Promise<{ dreamsign: string, count: number }[]> {
         let options = {
-            group: true
+            group: true,
+            limit: limit
         };
 
         return this.db.query('dreamsigns', options)
