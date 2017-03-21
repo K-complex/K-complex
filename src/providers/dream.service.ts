@@ -137,7 +137,7 @@ export class DreamService {
     }
 
     /**
-     * Gets all dreams.
+     * Gets all dreams ordered by date (most recent first).
      * 
      * @returns {Promise<Dream[]>}
      * 
