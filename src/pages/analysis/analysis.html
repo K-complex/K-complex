@@ -9,11 +9,13 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <h6 text-center>Dreamsign Occurrences</h6>
-    <ion-list>
-        <ion-item *ngFor="let dreamsignCount of dreamsignCounts">
-            {{dreamsignCount.dreamsign}}
-            <ion-badge item-right color="dark">{{dreamsignCount.count}}</ion-badge>
-        </ion-item>
-    </ion-list>
+    <ion-card>
+        <ion-card-header>Dreamsign Occurrences</ion-card-header>
+        <ion-list>
+            <ion-item *ngFor="let dreamsignCount of dreamsignCounts">
+                {{dreamsignCount.dreamsign}}
+                <ion-badge item-right color="dark">{{dreamsignCount.count}}</ion-badge>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 </ion-content>
