@@ -24,6 +24,14 @@ export class AnalysisPage {
     dreamsignCounts: { dreamsign: string, count: number }[];
 
     /**
+     * The total number of journal entries.
+     * 
+     * @type {number}
+     * @memberof AnalysisPage
+     */
+    totalDreams: number;
+
+    /**
      * Creates an instance of AnalysisPage.
      *
      * @param {NavController} navCtrl 
@@ -45,7 +53,8 @@ export class AnalysisPage {
      * @memberof AnalysisPage
      */
     ionViewWillEnter() {
+        this.dreamService.getAll().then(dreams => this.totalDreams = dreams.length);
         this.dreamService.getDreamsignCounts()
-            .then((dreamsignCounts) => this.dreamsignCounts = dreamsignCounts);
+            .then(dreamsignCounts => this.dreamsignCounts = dreamsignCounts);
     }
 }
