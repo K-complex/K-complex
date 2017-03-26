@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { Splashscreen, StatusBar } from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { AnalysisPage } from '../pages/analysis/analysis';
 import { HomePage } from '../pages/home/home';
@@ -47,10 +48,10 @@ export class AppComponent {
      * 
      * @memberof AppComponent
      */
-    constructor(platform: Platform) {
+    constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar) {
         platform.ready().then(() => {
-            Splashscreen.hide();
-            StatusBar.hide();
+            splashScreen.hide();
+            statusBar.hide();
         });
 
         this.pages = [
