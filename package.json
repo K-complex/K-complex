@@ -37,10 +37,12 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "1.1.4",
+        "@types/lorem-ipsum": "1.0.1",
         "@types/moment": "2.13.0",
         "@types/pouchdb": "5.4.28",
         "@types/pouchdb-find": "0.10.0",
         "@types/pouchdb-upsert": "2.0.2",
+        "lorem-ipsum": "1.0.3",
         "typescript": "2.0.9"
     },
     "cordovaPlugins": [

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as PouchDB from 'pouchdb';
 import * as PouchDBFind from 'pouchdb-find';
 import * as PouchDBUpsert from 'pouchdb-upsert';
+import * as loremIpsum from 'lorem-ipsum';
 import * as moment from 'moment';
 
 import { Dream } from './dream';
@@ -74,7 +75,6 @@ export class DreamService {
     /**
      * Creates an instance of DreamService.
      * 
-     * 
      * @memberof DreamService
      */
     constructor() {
@@ -91,6 +91,8 @@ export class DreamService {
 
             return Object.assign(doc, this.dreamsignIndex);
         });
+
+        // this.seedTestData(500);
     }
 
     /**
@@ -236,5 +238,69 @@ export class DreamService {
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
+    }
+
+    /**
+     * Generates a random date between the given dates.
+     * 
+     * @private
+     * @param {Date} start 
+     * @param {Date} end 
+     * @returns {Date} 
+     * 
+     * @memberof DreamService
+     */
+    private randomDate(start: Date, end: Date): Date {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
+    /**
+     * Generates a random integer between the specified values.
+     * 
+     * @private
+     * @param {number} min 
+     * @param {number} max 
+     * @returns {number} 
+     * 
+     * @memberof DreamService
+     */
+    private randomInt(min: number, max: number): number {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    /**
+     * Adds test dreams to the database.
+     * 
+     * @param {number} count - The number of dreams to add.
+     * 
+     * @memberof DreamService
+     */
+    private seedTestData(count: number) {
+        let dreams = [];
+
+        for (let i = 0; i < count; i++) {
+            let dream = new Dream();
+
+            // Random date between 2015 and now
+            dream.date = moment(this.randomDate(new Date(2015, 0, 1), new Date())).format('YYYY-MM-DD');
+            dream.created = dream.date;
+
+            // Random title and description
+            dream.title = loremIpsum({ count: this.randomInt(1, 7), units: 'words' });
+            dream.description = loremIpsum({ count: this.randomInt(1, 21) });
+
+            // Random dreamsigns selected from the words in the description
+            let descriptionWords = dream.description.split(' ');
+            dream.dreamsigns = [];
+            for (let i = 0; i < this.randomInt(1, 11); i++) {
+                dream.dreamsigns.push(descriptionWords[this.randomInt(0, descriptionWords.length)]);
+            }
+
+            dreams.push(dream);
+        }
+
+        this.db.bulkDocs(dreams);
     }
 }
